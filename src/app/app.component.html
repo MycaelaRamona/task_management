@@ -7,24 +7,25 @@
 <app-header></app-header>
 <main>
   <ul id="users">
-    <li>
-      <app-user [user]="users[0]" (select)="onSelectUser($event)"></app-user>
-      <!--Mudanção feita ápos otimozar o @Input no user.component.ts
-      <app-user [id]="users[0].id" [avatar]="users[0].avatar" [name]="users[0].name" (select)="onSelectUser($event)"><app-user> -->
-    </li>
-    <li>
-      <app-user  [user]="users[1]"  (select)="onSelectUser($event)"></app-user>
-    </li>
-    <li>
-      <app-user  [user]="users[2]" (select)="onSelectUser($event)"></app-user>
-    </li>
-    <li>
-      <app-user  [user]="users[3]"  (select)="onSelectUser($event)"></app-user>
-    </li>
+    <!-- <li>
+     <app-user [user]="users[0]" (select)="onSelectUser($event)"></app-user>
+      Mudanção feita ápos otimozar o @Input no user.component.ts
+      <app-user [id]="users[0].id" [avatar]="users[0].avatar" [name]="users[0].name" (select)="onSelectUser($event)"><app-user>
+    </li>-->
+    @for (user of users; track user.id){
+      <li>
+        <app-user  [user]="user"  (select)="onSelectUser($event)"></app-user>
+      </li>
+    }
   </ul>
+  @if(selectUser){
+    <app-tasks [name]="selectUser.name"></app-tasks>
+  } @else {
+    <p id="fallback">Select a user to see their tasks!</p>
+  }
 </main>
 
 
-<app-tasks [name]="selectUser ? selectUser.name : ''"></app-tasks>
+
 
 
