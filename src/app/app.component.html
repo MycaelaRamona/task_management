@@ -14,12 +14,12 @@
     </li>-->
     @for (user of users; track user.id){
       <li>
-        <app-user  [user]="user"  (select)="onSelectUser($event)"></app-user>
+        <app-user [user]="user" [selected]="user.id === selectUserId"  (select)="onSelectUser($event)"></app-user>
       </li>
     }
   </ul>
   @if(selectUser){
-    <app-tasks [name]="selectUser.name"></app-tasks>
+    <app-tasks [userId]="selectUser.id" [name]="selectUser.name"></app-tasks>
   } @else {
     <p id="fallback">Select a user to see their tasks!</p>
   }
